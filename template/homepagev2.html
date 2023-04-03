@@ -5,25 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-
+    <title>Blog</title>
+    <!-- icon -->
+    <link rel="icon" href="/static/icon/icon-home.ico" sizes="32x32" />
+    <!-- css -->
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.min.css">
-
+    <link rel="stylesheet" type="text/css" href="/static/css/blockinformarion.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/animate.min.css">
+    <!-- js -->
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/holder.min.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="/static/katex/katex.min.css">
-    <script src="/static/katex/katex.min.js"></script>
-
-    <script src="/static/js/webfont.js"></script>
-    <script src="/static/js/snap.svg-min.js"></script>
-    <script src="/static/js/underscore-min.js"></script>
-    <script src="/static/js/sequence-diagram-min.js"></script>
-
-    <script src="/static/js/raphael.min.js"></script>
-    <script src="/static/js/flowchart-latest.js"></script>
+    <script type="text/javascript" src="/static/js/blockinformarion.js"></script>
     <style>
         .container{
             padding: var(--hola-card-padding);
@@ -91,34 +85,32 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-    <div class="container">
-        <!-- <h1>{{title}}</h1> -->
-        <link rel="stylesheet" href="/static/editormd/css/editormd.preview.css" />
-        <div id="test-markdown-view">
-            <!-- Server-side output Markdown text -->
-            <textarea style="display:none;">{{article|safe}}</textarea>             
-        </div>
-        <script src="/static/editormd/editormd.js"></script>
-        <script src="/static/editormd/lib/marked.min.js"></script>
-        <script src="/static/editormd/lib/prettify.min.js"></script>
-        <script type="text/javascript">
-            $(function() {
-                var testView = editormd.markdownToHTML("test-markdown-view", {});
-                var qqq=$(".editormd-tex");
-                for(var i=0;i<qqq.length;i++){
-                    qqq[i].id="temps";
-                    katex.render(qqq[i].innerText, document.getElementById("temps"));
-                    qqq[i].id="";
-                }
-                qqq=$(".flowchart");
-                for(var i=0;i<qqq.length;i++){
-                    qqq[i].id="diagram";
-                    flowchart.parse(qqq[i].innerText).drawSVG('diagram');
-                    qqq[i].id="";
-                }
-                $(".sequence-diagram").sequenceDiagram({theme: 'hand'});
-            });
-        </script>
+    <div class="container" style="background-color: rgba(0,0,0,0);box-shadow: 0 0 25px rgba(0,0,0,0);">
+        
+        {% for i in obj %}
+        {% if i.ifok %}
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="wd">
+                    <div class="picture">
+                        <div class="top-text">
+                            <div class="top-right-text">
+                                <p>{{ i.id }}</p>
+                            </div>
+                            <div class="top-button-text">
+                                <p>{{ i.text }}</p>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <div class="title">
+                                <a href="/page/{{i.id}}/">{{ i.title }}</a>
+                            </div>
+                            <a href="/page/{{i.id}}/">{{ i.time }}</a><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
     </div>
 </body>
 
